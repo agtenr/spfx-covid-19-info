@@ -28,7 +28,7 @@ The table below gives an overview of the configuration settings of the web part:
  - run `npm install`
  - run `gulp serve`
 
-## Package the code
+## Package & Deploy
 
  - run `gulp build --ship`
  - run `gulp package-solution --ship`
