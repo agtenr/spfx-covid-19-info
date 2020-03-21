@@ -3,6 +3,7 @@ import { HttpClient } from "@microsoft/sp-http";
 
 export interface ICovid19InfoProps {
   countryCode: string;
+  viewMoreLink: string;
   countUpTime: number;
   confirmedColor: string;
   deathColor: string;

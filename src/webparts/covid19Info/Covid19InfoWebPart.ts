@@ -15,6 +15,7 @@ import { PropertyFieldColorPicker, PropertyFieldColorPickerStyle } from '@pnp/sp
 
 export interface ICovid19InfoWebPartProps {
   countryCode: string;
+  viewMoreLink: string;
   countUpTime: number;
   confirmedColor: string;
   deathColor: string;
@@ -28,6 +29,7 @@ export default class Covid19InfoWebPart extends BaseClientSideWebPart <ICovid19I
       Covid19Info,
       {
         countryCode: this.properties.countryCode,
+        viewMoreLink: this.properties.viewMoreLink,
         countUpTime: this.properties.countUpTime,
         confirmedColor: this.properties.confirmedColor,
         deathColor: this.properties.deathColor,
@@ -68,6 +70,9 @@ export default class Covid19InfoWebPart extends BaseClientSideWebPart <ICovid19I
             {
               groupName: "Web part configuration",
               groupFields: [
+                PropertyPaneTextField('viewMoreLink', {
+                  label: "Provide an optional link to view more statistics"
+                }),
                 PropertyPaneSlider('countUpTime', {
                   label: "Number of second for the count up counters",
                   min: 1,

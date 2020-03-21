@@ -3,11 +3,12 @@ import styles from './Covid19Info.module.scss';
 import { ICovid19InfoProps } from './ICovid19InfoProps';
 import { ICovid19InfoState } from './ICovid19InfoState';
 import { DisplayMode } from '@microsoft/sp-core-library';
-import { Placeholder } from "@pnp/spfx-controls-react/lib/Placeholder";
-import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
-import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
+import { Placeholder } from '@pnp/spfx-controls-react/lib/Placeholder';
+import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
+import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { IconButton } from 'office-ui-fabric-react/lib/Button';
+import { Link } from 'office-ui-fabric-react/lib/Link';
 import { ICoronaService } from '../../../services/ICoronaService';
 import { CoronaService } from '../../../services/CoronaService';
 import CountUp from "react-countup";
@@ -123,7 +124,11 @@ export default class Covid19Info extends React.Component<ICovid19InfoProps, ICov
             <div className={styles.lastUpdated}>
               {`Last updated:
                 ${new Date(this.state.coronaInfo.lastupdate).toLocaleDateString()}
-                ${new Date(this.state.coronaInfo.lastupdate).toLocaleTimeString()}`}
+                ${new Date(this.state.coronaInfo.lastupdate).toLocaleTimeString()}`
+              }
+              {this.props.viewMoreLink &&
+                <span> - <Link target={"_blank"} href={this.props.viewMoreLink}>View more statistics</Link></span>
+              }
             </div>
           </div>
         </div>

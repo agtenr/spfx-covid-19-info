@@ -13,13 +13,14 @@ API resource: https://ainize.ai/laeyoung/wuhan-coronavirus-api
 ## Web part configuration
 
 The table below gives an overview of the configuration settings of the web part:
-| Property                             | Group                  | Description                                                                                 | Default |
-|--------------------------------------|------------------------|---------------------------------------------------------------------------------------------|---------|
-| iso2 Country Code                    | Country Settings       | Defines the country for which the COVID-19 info should be displayed example: BE for Belgium | None    |
-| Up count duration                    | Web part configuration | Number of seconds for the counters to count up                                              | 2       |
-| Color for the Confirmed Cases number | Web part configuration | Defines the color of the Confirmed cases number                                             | #69797e |
-| Color for the Deaths number          | Web part configuration | Defines the color of the Deaths number                                                      | #d13438 |
-| Color for the Recovered number       | Web part configuration | Defines the color of the Recovered number                                                   | #498205 |
+| Property                             	| Group                  	| Description                                                                                 	| Default 	|
+|--------------------------------------	|------------------------	|---------------------------------------------------------------------------------------------	|---------	|
+| iso2 Country Code                    	| Country Settings       	| Defines the country for which the COVID-19 info should be displayed example: BE for Belgium 	| None    	|
+| View more statistics                 	| Web part configuration 	| Provide an optional external link to more details statistics                                	| None        	|
+| Up count duration                    	| Web part configuration 	| Number of seconds for the counters to count up                                              	| 2       	|
+| Color for the Confirmed Cases number 	| Web part configuration 	| Defines the color of the Confirmed cases number                                             	| #69797e 	|
+| Color for the Deaths number          	| Web part configuration 	| Defines the color of the Deaths number                                                      	| #d13438 	|
+| Color for the Recovered number       	| Web part configuration 	| Defines the color of the Recovered number                                                   	| #498205 	|
 
 ## Minimal Path to Awesome
 
