@@ -9,9 +9,14 @@ import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBa
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { IconButton } from 'office-ui-fabric-react/lib/Button';
 import { Link } from 'office-ui-fabric-react/lib/Link';
+import { Modal, IModalStyleProps, IModalStyles } from 'office-ui-fabric-react/lib/Modal';
+import { mergeStyleSets, IStyle } from "office-ui-fabric-react/lib/Styling";
 import { ICoronaService } from '../../../services/ICoronaService';
 import { CoronaService } from '../../../services/CoronaService';
+import { HistoryModal } from "./HistoryModal/HistoryModal";
 import CountUp from "react-countup";
+import { ICoronaInfoHistory } from '../../../models/ICoronaInfoHistory';
+import { IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities';
 
 export default class Covid19Info extends React.Component<ICovid19InfoProps, ICovid19InfoState> {
 
@@ -25,7 +30,8 @@ export default class Covid19Info extends React.Component<ICovid19InfoProps, ICov
     this.state = {
       isLoading: true,
       coronaInfo: undefined,
-      globalError: undefined
+      globalError: undefined,
+      showHistoryModal: false
     };
   }
 
@@ -79,6 +85,14 @@ export default class Covid19Info extends React.Component<ICovid19InfoProps, ICov
     return (
       <div className={styles.covid19Info}>
         <div className={styles.container}>
+          {this.props.showHistory && (
+            <IconButton
+              className={styles.historyIcon}
+              iconProps={{iconName: "Chart"}}
+              label={"View history"}
+              onClick={() => this._showHistoryModal()}
+            />
+          )}
           <IconButton
             className={styles.refreshIcon}
             iconProps={{iconName: "Refresh"}}
@@ -131,6 +145,21 @@ export default class Covid19Info extends React.Component<ICovid19InfoProps, ICov
               }
             </div>
           </div>
+          <Modal
+            isOpen={this.state.showHistoryModal}
+            onDismiss={this._closeHistoryModal}
+            isBlocking={false}
+            styles={this._getModalStyles()}
+          >
+
+            <HistoryModal
+              countryCode={this.props.countryCode}
+              confirmedColor={confirmedColor}
+              deathColor={deathColor}
+              recoveredColor={recoveredColor}
+              _loadHistoryData={this._loadHistoryData}
+            />
+          </Modal>
         </div>
       </div>
     );
@@ -151,6 +180,19 @@ export default class Covid19Info extends React.Component<ICovid19InfoProps, ICov
         globalError: (error as Error).message
       });
     }
+  }
+  private _loadHistoryData = async (): Promise<ICoronaInfoHistory> => {
+    return await this.coronaService.getCountryHistory(this.props.countryCode);
+  }
+  private _showHistoryModal = (): void => {
+    this.setState({
+      showHistoryModal: true
+    });
+  }
+  private _closeHistoryModal = (): void => {
+    this.setState({
+      showHistoryModal: false
+    });
   }
 
   private _renderNoCountryCode = (): JSX.Element => {
@@ -191,5 +233,17 @@ export default class Covid19Info extends React.Component<ICovid19InfoProps, ICov
         {`No COVID-19 data could be found for country code: '${this.props.countryCode}'`}
       </MessageBar>
     );
+  }
+
+  private _getModalStyles = (): IStyleFunctionOrObject<IModalStyleProps, IModalStyles> => {
+    const modalStyles: IStyleFunctionOrObject<IModalStyleProps, IModalStyles> = {
+      main: {
+        width: "750px",
+        height: "500px",
+        padding: "15px"
+      }
+    };
+
+    return modalStyles;
   }
 }

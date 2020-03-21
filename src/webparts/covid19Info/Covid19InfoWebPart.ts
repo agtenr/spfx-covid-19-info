@@ -5,6 +5,7 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
   PropertyPaneSlider,
+  PropertyPaneToggle
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
@@ -15,6 +16,7 @@ import { PropertyFieldColorPicker, PropertyFieldColorPickerStyle } from '@pnp/sp
 
 export interface ICovid19InfoWebPartProps {
   countryCode: string;
+  showHistory: boolean;
   viewMoreLink: string;
   countUpTime: number;
   confirmedColor: string;
@@ -29,6 +31,7 @@ export default class Covid19InfoWebPart extends BaseClientSideWebPart <ICovid19I
       Covid19Info,
       {
         countryCode: this.properties.countryCode,
+        showHistory: this.properties.showHistory,
         viewMoreLink: this.properties.viewMoreLink,
         countUpTime: this.properties.countUpTime,
         confirmedColor: this.properties.confirmedColor,
@@ -70,6 +73,9 @@ export default class Covid19InfoWebPart extends BaseClientSideWebPart <ICovid19I
             {
               groupName: "Web part configuration",
               groupFields: [
+                PropertyPaneToggle('showHistory', {
+                  label: "Show 'View history' button"
+                }),
                 PropertyPaneTextField('viewMoreLink', {
                   label: "Provide an optional link to view more statistics"
                 }),
