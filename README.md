@@ -37,3 +37,7 @@ The table below gives an overview of the configuration settings of the web part:
  - upload the `spfx-covid-19-info.sppkg` to the app catalog
  - Add the `spfx-covid-19-info-client-side-solution` to the site
  - Add the `COVID-19 info` web part to the page
+
+## Releases
+All release can be found on the [releases](https://github.com/agtenr/spfx-covid-19-info/releases) page.
+
